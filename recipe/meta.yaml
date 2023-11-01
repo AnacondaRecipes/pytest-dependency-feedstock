@@ -12,7 +12,7 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -v --no-deps --no-build-dependency
+  script: {{ PYTHON }} -m pip install . -v --no-deps --no-build-isolation
 
 requirements:
   host:
@@ -42,7 +42,7 @@ about:
     These tests will then be skipped if any of the dependencies did fail or has been skipped.
   license: Apache-2.0
   license_file: LICENSE.txt
-  license_family: Aparche
+  license_family: Apache
   dev_url: https://github.com/RKrahl/pytest-dependency
   doc_url: https://github.com/RKrahl/pytest-dependency
 
