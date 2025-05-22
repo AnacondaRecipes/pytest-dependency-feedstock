@@ -1,18 +1,18 @@
 {% set name = "pytest-dependency" %}
-{% set version = "0.5.1" %}
-
+{% set version = "0.6.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: c2a892906192663f85030a6ab91304e508e546cddfe557d692d61ec57a1d946b
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 934b0e6a39d95995062c193f7eaeed8a8ffa06ff1bcef4b62b0dc74a708bacc1
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -v --no-deps --no-build-isolation
+  skip: true  # [py<34]
 
 requirements:
   host:
@@ -21,9 +21,11 @@ requirements:
     - setuptools
     - wheel
     - setuptools_scm
+    - distutils_pytest
   run:
-    - pytest >=3.6.0
+    - pytest >=3.7.0
     - python
+    - setuptools
 
 test:
   imports:
@@ -37,8 +39,8 @@ about:
   home: https://github.com/RKrahl/pytest-dependency
   summary: Manage dependencies of tests
   description: |
-    This pytest plugin manages dependencies of tests. 
-    It allows to mark some tests as dependent from other tests. 
+    This pytest plugin manages dependencies of tests.
+    It allows to mark some tests as dependent from other tests.
     These tests will then be skipped if any of the dependencies did fail or has been skipped.
   license: Apache-2.0
   license_file: LICENSE.txt
@@ -48,4 +50,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - Windiana42 
+    - Windiana42
