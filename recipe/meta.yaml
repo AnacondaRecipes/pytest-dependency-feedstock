@@ -21,19 +21,38 @@ requirements:
     - setuptools
     - wheel
     - setuptools_scm
-    - distutils_pytest
   run:
     - pytest >=3.7.0
     - python
     - setuptools
 
+# All error similar to other tests, reffering to path issue
+# $SRC_DIR/tests/test_09_examples_usage.py:118: in test_runtime
+#     with get_example("runtime.py").open("rt") as f:
+#          ^^^^^^^^^^^^^^^^^^^^^^^^^
+# $SRC_DIR/tests/conftest.py:10: in get_example
+#     assert path.is_file()
+# E   AssertionError: assert False
+# E    +  where False = is_file()
+# E    +    where is_file = PosixPath('$SRC_DIR/doc/examples/runtime.py').is_file
+{% set ignore_tests = " --ignore=tests/test_09_examples_usage.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/test_09_examples_advanced.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/test_09_examples_names.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/test_09_examples_scope.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/test_09_examples_debugging.py" %}
+
 test:
+  source_files:
+    - tests
   imports:
     - pytest_dependency
-  commands:
-    - pip check
   requires:
     - pip
+    - pytest
+  commands:
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -ra -v --tb=short tests {{ignore_tests}}
 
 about:
   home: https://github.com/RKrahl/pytest-dependency
