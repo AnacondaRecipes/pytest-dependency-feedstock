@@ -23,7 +23,6 @@ requirements:
   run:
     - pytest >=3.7.0
     - python
-    - setuptools
 
 test:
   source_files:
@@ -33,6 +32,7 @@ test:
     - pytest_dependency
   requires:
     - pip
+    - setuptools
     - pytest
   commands:
     - pip check
