@@ -1,13 +1,13 @@
 {% set name = "pytest-dependency" %}
-{% set version = "0.6.0" %}
+{% set version = "0.6.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 934b0e6a39d95995062c193f7eaeed8a8ffa06ff1bcef4b62b0dc74a708bacc1
+  url: https://pypi.org/packages/source/p/pytest-dependency/pytest_dependency-0.6.1.tar.gz
+  sha256: 246c24d2a5fc743a942cec4408853640e56a05ba58d46e5b213a1d4b738a2464
 
 build:
   number: 0
@@ -20,9 +20,11 @@ requirements:
     - python
     - setuptools
     - wheel
+    - distutils_pytest
   run:
     - pytest >=3.7.0
     - python
+    - setuptools
 
 test:
   source_files:
